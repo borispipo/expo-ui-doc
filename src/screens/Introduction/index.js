@@ -1,5 +1,5 @@
 import Screen from "$escreen";
-import DocVersion from "$edocs/components/DocVersion";
+import DocVersion from "$components/DocVersion";
 import View from "$ecomponents/View";
 
 export default function DocIntrodoctionScreen(props){
