@@ -1,0 +1,1 @@
+export default "Nouveau contact";

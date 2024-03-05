@@ -11,6 +11,6 @@ module.exports = function(api) {
     }
     return require("@fto-consult/expo-ui/babel.config")(api,{
       alias,
-      withPouchDB:false,//toggle support of pouchdb database,
+      withPouchDB:true,//toggle support of pouchdb database,
     });
 };

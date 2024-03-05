@@ -11,6 +11,8 @@ import TableDataScreen from "$screens/TableData/TableDataScreen";
 import Notifications from "$components/Notifications";
 import auth from "$src/auth";
 import {disableAuth} from "$cauth";
+import getTableData from "$src/database/tables/getTable";
+import tablesData from "$src/database/tables";
 
 export default function AppMainEntry(){
     return <ExpoUIProvider    
@@ -76,7 +78,8 @@ export default function AppMainEntry(){
         }}
         ///fonction de rappel appelée avant d'exit l'application, doit retourner une promesse que lorsque résolue, exit l'application
         beforeExit = {()=>Promise.resolve(true)}    
-        
+        getTableData = {getTableData}
+        tablesData = {tablesData}
         handleHelpScreen ={true} //si l'écran d'aide sera pris en compte, l'écran d'aide ainsi que les écrans des termes d'utilisations et autres
     />
 }  

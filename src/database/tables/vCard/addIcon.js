@@ -1,0 +1,1 @@
+export default "card-account-details-outline";

@@ -5,4 +5,5 @@ export default [
     Home,
     Introduction,
     require("./Datagrid").default,
+    ...require("./TableData").default,
 ]

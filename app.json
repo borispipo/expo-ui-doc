@@ -18,7 +18,8 @@
         {
           "cameraPermission": "Autoriser $(PRODUCT_NAME) à accéder à votre camera"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "icon": "./assets/icon.png",
     "jsEngine": "hermes",
