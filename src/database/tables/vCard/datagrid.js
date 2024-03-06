@@ -5,6 +5,7 @@ import addIcon from "./addIcon";
 import editIcon from "./editIcon";
 import {printTableData} from "$epdf";
 import {format,fields as fFields} from "$src/vCard";
+import Label from "$ecomponents/Label";
 const {version} = fFields;
 export default {
     actions : [
@@ -23,15 +24,26 @@ export default {
                 icon : "qrcode-plus",
                 text : "Générer QRCodes",
                 onPress : ()=>{
+                    const _fields = {version,sep:{type:"html",render:()=><Label primary textBold fontSize={17}>Work addesses</Label>,label:"Work addesses",responsiveProps : {style:[{width:"100%"}]}}};
+                    const addessesFields = ['label',"street","city","stateProvince","postalCode","countryRegion"];
+                    addessesFields.map((add)=>{
+                        _fields[add] = {
+                            type : "text",
+                            label : add.includes("country")? "Country" : add.toCamelCase().ucFirst(),
+                        }
+                    });
                     return printTableData(Object.values(selectedRows),{
                         tableName : table,
                         formDataProps : {
-                            fields : {
-                                version,
-                            }
+                            fields : _fields,
                         },
-                        print : ({data,version})=>{
-                            const qr = format({...data,version});
+                        print : ({data,version,...rest})=>{
+                            const workAddress = {};
+                            addessesFields.map((ad)=>{
+                                workAddress[ad] = rest[ad];
+                            });
+                            console.log("will print with work address ",workAddress,data);
+                            const qr = format({...data,version,workAddress});
                             const fileName = `${data.firstName && `${data.firstName}`||''}${data.middleName && ` ${data.middleName} `||''}${data.lastName && ` ${data.lastName}` || ""}`;
                             return {
                                 content : [

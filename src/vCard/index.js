@@ -414,7 +414,9 @@ export default function format(vCard) {
         }
     }
 
-    [{
+    [
+        ...(Array.isArray(vCard.addresses)? vCard.addresses : []),
+    {
         details: vCard.homeAddress,
         type: 'HOME'
     }, {
