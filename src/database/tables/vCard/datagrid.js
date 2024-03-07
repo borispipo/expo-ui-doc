@@ -6,12 +6,18 @@ import editIcon from "./editIcon";
 import {printTableData} from "$epdf";
 import {format,fields as fFields} from "$src/vCard";
 import Label from "$ecomponents/Label";
+import {showConfirm} from "$econfirm";
+import {removeVCards} from "$src/database/utils";
+import notify from "$notify";
+import Preloader from "$preloader";
+
 const {version} = fFields;
+
 export default {
     actions : [
         {icon:addIcon,text:newElementLabel,onPress:()=>navigateToTableData(table)},
     ],
-    selectedRowsActions : ({selectedRows})=>{
+    selectedRowsActions : ({selectedRows,context})=>{
         return [
             {
                 icon : editIcon,
@@ -55,6 +61,23 @@ export default {
                     })
                 }
             },
+            {
+                text : "Supprimer",
+                icon : "delete",
+                onPress : ()=>{
+                    return showConfirm({
+                        title : "Supprimer les éléments",
+                        message : "Voulez vous supprimer les éléments sélectionnés",
+                        onSuccess : ()=>{
+                            Preloader.open("Suppression en cours...");
+                            return removeVCards(selectedRows).then(()=>{
+                                notify.success("Données supprimées avec succèes");
+                                context?.refresh && context.refresh();
+                            }).finally(Preloader.close);
+                        }
+                    })
+                }
+            }
         ]
     }
 }
