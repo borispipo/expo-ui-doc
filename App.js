@@ -80,7 +80,7 @@ export default function AppMainEntry(){
         beforeExit = {()=>Promise.resolve(true)}    
         getTableData = {getTableData}
         tablesData = {tablesData}
-        handleHelpScreen ={true} //si l'écran d'aide sera pris en compte, l'écran d'aide ainsi que les écrans des termes d'utilisations et autres
+        handleHelpScreen ={false} //si l'écran d'aide sera pris en compte, l'écran d'aide ainsi que les écrans des termes d'utilisations et autres
     />
 }  
 

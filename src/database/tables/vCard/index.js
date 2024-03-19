@@ -10,4 +10,5 @@ export default {
     newElementLabel : require("./newElementLabel").default,
     tableName,
     datagrid : require("./datagrid").default,
+    order : 15,
 }
